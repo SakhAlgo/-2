@@ -22,6 +22,7 @@ print(df.info())
 
 # print(df.groupby(by='Pclass')['Age'].median())
 def get_age(row):
+    
     if pd.isnull(row['Age']):
         if row['Pclass'] == 1:
             return 37
@@ -52,8 +53,11 @@ def get_alone(row):
 df['Alone'] = df.apply(get_alone, axis=1)
 # print(df.pivot_table(index='Survived', columns='Alone', values='Sex', aggfunc='count'))
 # print(df.info())
+
+# start ml
 x = df.drop('Survived', axis=1)
 y = df['Survived']
+
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25)
 sc = StandardScaler()
@@ -65,4 +69,4 @@ classifire.fit(x_train, y_train)
 y_pred = classifire.predict(x_test)
 precent = accuracy_score(y_test, y_pred) * 100
 print(precent)
-print(confusion_matrix(y_test, y_pred))git remote add origin https://github.com/SakhAlgo/ML.git
+print(confusion_matrix(y_test, y_pred))
